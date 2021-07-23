@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>The Terminal</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/he/1.2.0/he.min.js"></script>
+	<style>
+		body {
+			background: black;
+			color: lime;
+		}
+
+		@-webkit-keyframes blinker {
+			0% {
+				visibility: visible;
+			}
+
+			50% {
+				visibility: hidden;
+			}
+
+			100% {
+				visibility: visible;
+			}
+		}
+
+		@keyframes blinker {
+			0% {
+				visibility: visible;
+			}
+
+			50% {
+				visibility: hidden;
+			}
+
+			100% {
+				visibility: visible;
+			}
+		}
+
+		blink {
+			-webkit-animation: blinker steps(1) 1s infinite;
+			animation: blinker steps(1) 1s infinite;
+		}
+	</style>
+
+</head>
+
+<body>
+	<code><label id="termoutput">> </label><blink>_</blink></code>
+    <br>
+    <code><label id="termreturn"></label></code>
+    <script>
+      function outeval(code){return parent.eval(code);}
+      (function () {
+        var TEXT = "";
+        var specialkeys = ["Control", "Shift", "CapsLock", "ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", "Home", "PageUp", "PageDown", "End", "NumLock","Tab","Alt","AltGraph","Insert","Meta"];
+
+        let cmd = { 
+          help: function (args) {
+            var helpData = {
+              "help": "This",
+              "clear": "clear the terminal",
+              "echo": "echo the text",
+              "exit": "exit the terminal"
+            };
+
+            var tmp = '';
+            for (i in cmd) tmp += (he.encode(i) + ': ' + (helpData[i] ? he.encode(helpData[i]) : "&#60;none&#62;") + "<br>");
+            termoutput.innerHTML = termoutput.innerHTML + "<br>" + tmp + "> "; 
+          },
+          clear: function () { 
+            termoutput.innerHTML = "> "; 
+            return ''; 
+          }, 
+          echo: function (args) {
+            printReturn(args);
+          }, 
+          exit: function () {
+            window.close();
+          }
+        }
+
+        for (i = 1; i <= 12; i++) {
+          specialkeys.push('F' + i)
+        }
+        
+        document.onkeydown = function (a) {
+            a.preventDefault(true)
+            // console.log(a.key);
+            if (specialkeys.includes(a.key)) { return; }
+            a.key = a.key.replace("", " ");
+            if (a.key != "Enter") {
+                if (a.key != "Backspace") {
+                    if (a.key != "Delete") {
+                        TEXT = TEXT + a.key; printText(a.key);
+                    } else clearText();
+                } else {
+                    deletText();
+                }
+            } else {
+                var thes = window.parent;
+                if (thes.apps && Object.keys(thes.apps).includes(TEXT)) {
+                    thes.apps[TEXT].exec();
+                    printReturn('');
+                    clearText();
+                } else {
+                  var args = "";
+                  var tmp2 = TEXT.split(" ");
+                  var tmp = TEXT.split(" ");
+                  if (tmp[0] === TEXT) args = ""; else { tmp.shift(); args = tmp.join(' '); };
+
+                  if (Object.keys(cmd).includes(tmp2[0])) {
+                      cmd[tmp2[0]](args);
+                      clearText();
+                  } else {
+                      try {
+                        printReturn(outeval(TEXT));
+                      } catch (err) {
+                        if (err) { printError(err) }
+                      }
+                    clearText();
+                   }
+                }
+            }
+        }
+
+        function printReturn(a) {
+            if (a === undefined || a === null || a === NaN) { termoutput.innerHTML += "<br> > "; return };
+            termoutput.innerHTML += "<br>";
+            printText(a);
+            termoutput.innerHTML += "<br> > ";
+        }
+
+        function printText(a) {
+          if (a === undefined || a === null || a === NaN) return;
+          termoutput.innerHTML = termoutput.innerHTML + he.encode(a.toString());
+        }
+
+        function deletText() {
+            let x = termoutput.innerHTML.split("")
+            let a = TEXT.split("");
+            x.pop();
+            a.pop();
+            TEXT = a.join("");
+            var string = x.join("");
+            termoutput.innerHTML = string;
+        }
+
+        function clearText() {
+            TEXT = "";
+        }
+
+        function printError(err) {
+            termoutput.innerHTML += "<br>";
+            termoutput.innerHTML += "<label style=\"color: red\">" + err.toString() + "</label>";
+            termoutput.innerHTML += "<br> > ";
+        }
+      })();
+    </script>
+    </body>
+</html>

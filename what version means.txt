@@ -1,0 +1,9 @@
+0.2.2_15.622_20210719_Beta
+  |            |            |          |  
+version    nr of          nr of          last modified
+  |        files used     lines usedused       date
+  |     (without folders) in each file
+	|
+first number: big changes. If it's 0, this OS is in beta.
+second number: medium changes.
+third number: low changes. sometime useless.
