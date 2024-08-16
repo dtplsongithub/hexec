@@ -1,0 +1,57 @@
+body {
+  background: #9999aa;
+  color: #fefefb;
+	overflow: hidden;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+#bootp {
+  position: absolute;
+  width: 80%;
+  background-color: #6e7577;
+  bottom: 40px;
+  left: 10%;
+  border-top: 2px solid #fff;
+  border-left: 2px solid #fff;
+  border-right: 2px solid gray;
+  border-bottom: 2px solid gray;
+  box-shadow: inset 2px 2px #dfdfdf, 2px 0 #000, 0 2px #000, 2px 2px #000; 
+  height: 24px;
+}
+
+#bootp-inner {
+  width: 0;
+  height: 22px;
+  background-color: #0dc4f1;
+  border-top: 2px solid #0cb3e0;
+  border-left: 2px solid #0cb3e0;
+  border-right: 2px solid #1ed5ff;
+  border-bottom: 2px solid #1ed5ff;
+}
+
+#bootp-text{
+	position: relative;
+	color:white;
+	bottom: 21px;
+	text-shadow: 3px 3px 2px gray;
+}
+
+.boot { 
+  background: #9999aa;
+  text-align: center;
+  cursor: url(/cursors/SmoothNo.cur), auto;
+}
+
+.boot center{
+	height: 260px;
+	width: 300px;
+	background: #bbbbcc;
+	position: relative;
+	top: calc(50vh - 200px);
+	left: calc(50vw - 150px);
+	padding-top: 20px;
+	padding-bottom: 20px;
+}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<title>File Explorer</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/he/1.2.0/he.min.js">
+	</script>
+</head>
+
+<body>
+  <button onclick='newfile();'>Create file</button><button onclick='newfolder()'>Create Folder</button><button onclick='format()'>Format</button><button>
+  <hr>
+  <input type="text" id="path"></input>
+  <hr>
+	<div id="files"></div>
+	<script src="explorer.js"></script>
+	<style>
+		html,body,#files {
+			width: 100vw;
+			height: 100vh;
+			float: left;
+			margin: 0;
+			padding: 0;
+			border: none;
+			overflow: hidden;
+		}
+
+		button {
+			border-color: black;
+			border-style: solid;
+      border-raduis: 8px;
+      background-color: #eee;
+		}
+
+    hr{
+      width: calc(100% - 6px);
+    }
+	</style>
+</body>
+</html>

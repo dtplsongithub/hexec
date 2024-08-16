@@ -11,10 +11,16 @@ const number = {
     const emptyCellIndex = grid.randomEmptyCellIndex();
     if (emptyCellIndex === false) return false;
     const numberElement = document.createElement("div");
-    const numberValue = 2.5;
+    /*const*/let numberValue = 2.5;
+    if (Math.random() <= 0.5) {
+      numberValue = numberValue * 2.5;
+    }
 
-    numberElement.style.backgroundColor = "rgb(" + (100 / numberValue) + ", " + (50 / numberElement) + ", 0)";
-    numberElement.innerHTML = "<span style='font-size: " + (170 / numberValue.toString().length) + "px;'>" + numberValue + "</span>";
+    numberElement.style.backgroundColor = "rgb(" + (250 / numberValue) + ", " + (500 / (numberValue / 100)) + ", " + (numberValue / 100) + ")";
+    console.log("cell color: rgb(" + (250 / numberValue) + ", " + (500 / (numberValue / 30)) + ", " + (numberValue / 100) + ")");
+    numberElement.style.color = "rgb(" + (50 / numberValue) + ", " + (100 / numberValue) + ", " + (numberValue / 100) + ")";
+    numberElement.innerHTML = "<span class='num' style='font-size: " + (70 / numberValue.toString().length) + "px;'>" + numberValue + "</span>";
+    //numberElement.children[0].style.backgroundColor = "rgb(" + (100 / numberValue) + ", " + (50 / numberElement) + ", 0)";
     numberElement.dataset.value = numberValue;
     numberElement.classList.add("number");
     numberElement.style.top = `${grid.cells[emptyCellIndex].top}px`;
@@ -45,16 +51,33 @@ const number = {
       setTimeout(function () { grid.gridElement.removeChild(number); }, 500);
 
       // double target cell's number
-      const newNumberValue = toCell.number.dataset.value * 2.5;
+      const newNumberValue = Math.round((toCell.number.dataset.value * 2.5) * 100) / 100;
       toCell.number.dataset.value = newNumberValue;
-      toCell.number.innerHTML = "<span style='font-size: " + (170 / newNumberValue.toString().length) + "px;'>" + newNumberValue + "</span>";
+      toCell.number.style.backgroundColor = "rgb(" + (250 / newNumberValue) + ", " + (500 / (newNumberValue / 100)) + ", " + (newNumberValue / 100) + ")";
+      console.log("new " + newNumberValue + " cell color: rgb(" + (250 / newNumberValue) + ", " + (500 / (newNumberValue / 30)) + ", " + (newNumberValue / 80) + ")");
+      //toCell.number.style.color = "rgb(" + (50 / newNumberValue) + ", " + (100 / newNumberValue) + ", 0)";
+      toCell.number.innerHTML = "<span class='num' style='font-size: " + (70 / newNumberValue.toString().length) + "px;'>" + newNumberValue + "</span>";
 
       fromCell.number = null;
 
       // add score
-      score += toCell.number.dataset.value;
+      score += toCell.number.dataset.value * 1;
     }
+    this.updateScore();
+  },
+  updateScore: function () {
+    document.getElementsByClassName("score")[0].children[0].innerText = "score: " + number.score();
+    fetch("https://cors-enabled.herokuapp.com/https://hexec-sevrer.dateplays.repl.co/23841sethighscore?hs=" + score)
+      .then(data => data.text())
+      .then(body => console.log("set the highscore!"));
   }
 }
+number.updateScore();
 
 export default number;
+
+setInterval(() => {
+  fetch("https://cors-enabled.herokuapp.com/https://hexec-sevrer.dateplays.repl.co/23841gethighscore")
+    .then(data => data.text())
+    .then(body => { console.log("got highscore!"); document.getElementsByClassName("score")[0].children[2].innerHTML = "highscore: " + body; })
+}, 100)

@@ -1,0 +1,125 @@
+<html>
+
+<head>
+	<title>Calculator</title>
+	<style>
+		.btn {
+			background-color: #777788;
+			color: black;
+			border: solid black 2px;
+			width: 100%;
+			user-select: none;
+			-moz-user-select: none;
+			-webkit-user-select: none;
+			-ms-user-select: none;
+		}
+
+		.output {
+			background-color: #AAACA8;
+			color: black;
+			border: solid black 2px;
+			width: 100%;
+			user-select: text;
+			-moz-user-select: text;
+			-webkit-user-select: text;
+			-ms-user-select: text;
+		}
+
+		.error {
+			background-color: #AAACA8;
+			margin-bottom: 10px;
+			text-align: center;
+			width: 210px;
+			color: red;
+			border: solid black 2px;
+		}
+
+		.main {
+			background-color: #AAACA8;
+			border-color: black;
+			border-style: solid;
+		}
+
+		body {
+			background: #333536;
+			color: #dcdeee;
+		}
+	</style>
+</head>
+
+<body>
+	<center>
+		<div class="error" id="err" style="display:none;"><b>ERROR</b></div>
+		<table class="main">
+			<tr>
+				<td colspan="3"><input type="text" id="result" class="output" disabled /></td>
+                <td><input type="button" value="c" onclick="clr()" class="btn" /> </td>
+            </tr>
+            <tr>
+                <td><input type="button" value="1" onclick="dis('1')" class="btn" /> </td>
+                <td><input type="button" value="2" onclick="dis('2')" class="btn" /> </td>
+                <td><input type="button" value="3" onclick="dis('3')" class="btn" /> </td>
+                <td><input type="button" value="r" onclick="rem()" class="btn" /> </td>
+            </tr>
+            <tr>
+                <td><input type="button" value="4" onclick="dis('4')" class="btn" /> </td>
+                <td><input type="button" value="5" onclick="dis('5')" class="btn" /> </td>
+                <td><input type="button" value="6" onclick="dis('6')" class="btn" /> </td>
+                <td><input type="button" value="/" onclick="dis('/')" class="btn" /> </td>
+
+            </tr>
+            <tr>
+                <td><input type="button" value="7" onclick="dis('7')" class="btn" /> </td>
+                <td><input type="button" value="8" onclick="dis('8')" class="btn" /> </td>
+                <td><input type="button" value="9" onclick="dis('9')" class="btn" /> </td>
+                <td><input type="button" value="-" onclick="dis('-')" class="btn" /> </td>
+
+            </tr>
+            <tr>
+                <td><input type="button" value="." onclick="dis('.')" class="btn" /> </td>
+                <td><input type="button" value="0" onclick="dis('0')" class="btn" /> </td>
+                <td><input type="button" value="=" onclick="solve()" class="btn" /> </td>
+                <td><input type="button" value="+" onclick="dis('+')" class="btn" /> </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><input type="button" value="*" onclick="dis('*')" class="btn" /> </td>
+            </tr>
+        </table>
+    </center>
+    <script>
+        var resulte = document.getElementById("result");
+        var erre = document.getElementById("err");
+
+        function dis(val) {
+            resulte.value += val
+        }
+
+        function clr() {
+            resulte.value = ""
+        }
+
+        function rem() {
+            var x = resulte.value;
+            resulte.value = x.substring(0, x.length - 1);
+        }
+
+        function solve() {
+            var x = resulte.value;
+            if (x.includes("undefined")) return clr();
+            if (x.includes("NaN")) return clr();
+            if (x.includes("null")) return clr();
+            erre.style.display = "none";
+            try {
+                resulte.value = eval(x);
+            } catch (err) {
+                clr();
+                erre.style.display = "";
+            }
+        }
+    </script>
+</body>
+
+</html>

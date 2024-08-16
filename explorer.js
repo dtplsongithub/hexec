@@ -26,11 +26,11 @@ function format(){
 }
 
 function open(key){
-	if(localStorage[key].startsWith("[sysfile.folder]")){
+	if(parent.localStorage[key].startsWith("[sysfile.folder]")){
 		location.hash="#"+key;
 		location.reload();
 	} else {
-		window.parent.alert("There is no text application, that will be for 0.2.4")
+		window.parent.app(key);
 	}
 }
 /** dateplays: you guys are the best! **/

@@ -1,0 +1,21 @@
+html, body, canvas, #logo {
+	float:left;
+	margin:0;
+	padding:0;
+	border:none;
+	width:100vw;
+	height:100vh;
+  cursor: none;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+#logo {
+	filter:invert(1);
+	object-fit: scale-down;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+}

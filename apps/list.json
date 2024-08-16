@@ -1,3 +1,25 @@
 [
-  "socketmsgr.js"
+  "jfetchtrack.js",
+  "qq.js",
+  "socketmsgr.js",
+	"notepad.js",
+	"batch-files.js",
+	"store.js",
+  "smllgm.js",
+	"pong.js",
+	"duck.js",
+	"popup.js",
+	"rate.js",
+	"ErrCodeInspect.js",
+  "newstore.js",
+  "settings.js",
+	"languages.js",
+	"hxs-repl.js",
+  "winxytest.js",
+  "midiplay.js",
+  "polishcow.js",
+	"hxseditor.js",
+	"accounts.js",
+  "themes.js",
+  "thememaker.js"
 ]

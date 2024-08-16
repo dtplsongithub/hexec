@@ -7,3 +7,4 @@ version    nr of          nr of          last modified
 first number: big changes. If it's 0, this OS is in beta.
 second number: medium changes.
 third number: low changes. sometime useless.
+i rhink :rhino:

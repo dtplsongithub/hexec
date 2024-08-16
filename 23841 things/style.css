@@ -1,23 +1,26 @@
-body {
-  font-family: 'Seoge UI';
-  background: #e1eef3;
-  color: #05030a;
+@font-face{
+	src: url("seogeui.ttf");
+	font-family: "Seoge UI";
 }
 
-@font-face{
-	src: url("/23841 things/seogeui.ttf");
-	font-family: "Seoge UI";
+* {
+  font-family: 'Seoge UI';
+}
+
+body{
+	background: #333536;
+  color: #dcdeee;
 }
 
 body, html {width: 100%; height: 100%; overflow: hidden;}
 
-.wrapper {width: 70vmin; height: 70vmin; margin: 0 auto; background-color: #AAACA8;}
-.grid {width: 100%; position: relative;}
+.wrapper {width: 70vmin; /* height: 70vmin; */ margin: 0 auto; background-color: #AAACA8;}
+.grid {width: 100%; height: 70vmin; position: relative;}
 .cell {
     width: 15vmin;
     height: 15vmin;
     margin: 2vmin 2vmin 0 0;
-    background-color: #C5C6BE;
+    background-color: #c5c6be;
     float: left;
 }
 /* add left margin to first childs of rows */
@@ -33,7 +36,19 @@ body, html {width: 100%; height: 100%; overflow: hidden;}
     font-weight: bold;
     text-align: center;
     line-height: 15vmin;
-    background-color: #6baebe;
-    color: rgb(24, 25, 26);
+    /* background-color: #6baebe; */
+    color: #e4eaf0;
     transition: all .06s;
+}
+
+.score-container{
+   background: #5f9ea0;
+}
+
+.score{
+  color:#19222b;
+}
+
+.num{
+  color:#edf0ff
 }

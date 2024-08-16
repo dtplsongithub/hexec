@@ -4,7 +4,9 @@
 <head>
 	<title>The Terminal</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/he/1.2.0/he.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/he/1.2.0/he.min.js">
+
+	</script>
 	<style>
 		body {
 			background: black;
@@ -48,14 +50,24 @@
 </head>
 
 <body>
-	<code><label id="termoutput">> </label><blink>_</blink></code>
+	<code id="term"><label id="termoutput">> </label><blink>_</blink></code>
     <br>
     <code><label id="termreturn"></label></code>
     <script>
       function outeval(code){return parent.eval(code);}
       (function () {
         var TEXT = "";
+        var termelem = document.getElementById('term');
+        var termoutput = document.getElementById('termoutput');
         var specialkeys = ["Control", "Shift", "CapsLock", "ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", "Home", "PageUp", "PageDown", "End", "NumLock","Tab","Alt","AltGraph","Insert","Meta"];
+        for (i = 1; i <= 12; i++) specialkeys.push('F' + i);
+
+        function scrollDown() {
+          // auto scroll
+          if (window.scrollTo) window.scrollTo(0, document.body.scrollHeight);
+          document.body.scrollTop = document.body.scrollHeight;
+          document.documentElement.scrollTop = document.documentElement.scrollHeight;
+        }
 
         let cmd = { 
           help: function (args) {
@@ -63,32 +75,52 @@
               "help": "This",
               "clear": "clear the terminal",
               "echo": "echo the text",
+              "appslist": "list all applications",
+              "load": "load script like batch",
               "exit": "exit the terminal"
             };
 
-            var tmp = '';
-            for (i in cmd) tmp += (he.encode(i) + ': ' + (helpData[i] ? he.encode(helpData[i]) : "&#60;none&#62;") + "<br>");
-            termoutput.innerHTML = termoutput.innerHTML + "<br>" + tmp + "> "; 
+            var tmp = '===== Commands List =====\n';
+            for (i in cmd) tmp += (he.encode(i) + ': ' + (helpData[i] ? he.encode(helpData[i]) : "&#60;none&#62;") + "\n");
+            printReturn(tmp);
+            return 0; 
           },
           clear: function () { 
             termoutput.innerHTML = "> "; 
-            return ''; 
+            return 0;
           }, 
           echo: function (args) {
             printReturn(args);
+            return 0;
           }, 
+          appslist: function () {
+            var thes = window.parent;
+            if (!thes.apps) { printError(new Error("Apps not found")); return 1; };
+            var tmp = '===== Applications List =====\n';
+            for (app in thes.apps) tmp += (he.encode(app) + (thes.apps[app].name ? ": " + he.encode(thes.apps[app].name) : "") + "\n");
+            printReturn(tmp);
+            return 0;
+          },
+          load: function (url) {
+            fetch(url).then(d => {
+              if (!d.ok) throw new Error("ERROR: Script not found");
+              d.text().then(s => {
+                try {
+                  eval(s);
+                } catch (err) {
+                  throw err;
+                }
+              }).catch(e => { throw e; });
+            }).catch(printError);
+          },
           exit: function () {
             window.close();
+            return 0;
           }
-        }
-
-        for (i = 1; i <= 12; i++) {
-          specialkeys.push('F' + i)
-        }
+        }        
         
         document.onkeydown = function (a) {
             a.preventDefault(true)
-            // console.log(a.key);
             if (specialkeys.includes(a.key)) { return; }
             a.key = a.key.replace("", " ");
             if (a.key != "Enter") {
@@ -131,11 +163,12 @@
             termoutput.innerHTML += "<br>";
             printText(a);
             termoutput.innerHTML += "<br> > ";
+            scrollDown();
         }
 
         function printText(a) {
           if (a === undefined || a === null || a === NaN) return;
-          termoutput.innerHTML = termoutput.innerHTML + he.encode(a.toString());
+          termoutput.innerHTML = termoutput.innerHTML + he.encode(a.toString()).replace(/(?:\r\n|\r|\n)/g, '<br>');
         }
 
         function deletText() {

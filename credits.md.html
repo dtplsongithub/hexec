@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>credits</title>
+	<link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
+	 rel="stylesheet" type="text/css" />
+	<style>
+		* {
+			font-family: 'Ubuntu', sans-serif;
+			font-weight: 300;
+		}
+	</style>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"></script>
+</head>
+
+<body>
+	<div id="credits">Loading...</div>
+	<script>
+    var converter = new showdown.Converter();
+		fetch("/credits.md").then(res => {
+    if (!res.ok) { document.getElementById("credits").innerHTML = '<h1>Failed to load credits.md</h1>'; return; }
+    res.text().then(credits => {
+      document.getElementById("credits").innerHTML = converter.makeHtml(credits);
+    }).catch(console.error);
+  }).catch(console.error);
+	</script>
+</body>
+
+</html>

@@ -32,23 +32,16 @@ const grid = {
   },
   randomEmptyCellIndex: function () {
     let emptyCells = [];
+    for (let i = 1; i < this.cells.length; i++) if (this.cells[i].number === null) emptyCells.push(i);
 
-    for (let i = 1; i < this.cells.length; i++) {
-      if (this.cells[i].number === null) {
-        emptyCells.push(i);
-      }
-    }
-
-    if (emptyCells.length === 0) {
-      // no empty cell, game over
-      return false;
-    }
+    // no empty cell, game over
+    if (emptyCells.length === 0) return false;
 
     return emptyCells[Math.floor(Math.random() * emptyCells.length)];
   },
   slide: function (direction) {
     if (!this.playable) return false;
-    
+
     // set playable to false to prevent continous slides
     this.playable = false;
 
@@ -82,18 +75,15 @@ const grid = {
             const foreCellIndex = root + (k * increment);
             const foreCell = this.cells[foreCellIndex];
 
-            if (foreCell.number === null) {
-              // the cell is empty, move to and check next cell
-              moveToCell = foreCell;
-            } else if (cell.number.dataset.value === foreCell.number.dataset.value) {
+            // the cell is empty, move to and check next cell
+            if (foreCell.number === null) moveToCell = foreCell; else if (cell.number.dataset.value === foreCell.number.dataset.value) {
               // the cell has same number, move, merge and stop
               moveToCell = foreCell;
               break;
-            } else {
+
               // next cell is not empty and not same with moving number(number is moving cell is not)
               // number can't go further
-              break;
-            }
+            } else break;
           }
 
           if (moveToCell !== null) number.moveTo(cell, moveToCell);
@@ -103,9 +93,7 @@ const grid = {
 
     // spawn a new number and make game playable
     setTimeout(function () {
-      if (number.spawn()) {
-        grid.playable = true;
-      } else {
+      if (number.spawn()) grid.playable = true; else {
         // game over screen
         document.getElementsByClassName("grid")[0].style = "filter: brightness(1.5);";
         document.getElementById("gameover").style.display = "block"

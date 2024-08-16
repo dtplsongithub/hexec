@@ -1,0 +1,332 @@
+/*
+[theme.name]Windows 95
+[theme.system]false
+[theme.author]Microsoft
+[theme.version]0.0.0
+*/
+
+/* DO NOT EDIT!!!!!!! */
+
+* { 
+  font-family: 'W95FA';
+	font-weight: 300;
+} 
+
+b{
+	font-weight: 500;
+}
+
+html {
+  cursor: url(/cursors/win95/arrow.cur), auto !important;
+}
+
+button, .wintitle div, #listbar div {
+	cursor: url(/cursors/win95/Cursor_15.cur), pointer !important;
+}
+
+.wintitle:active {
+  cursor: url(/cursors/win95/Cursor_10.cur), move !important;
+}
+
+.desktop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc( 100% - 10px );
+  height: calc( 100% - 10px );
+  padding: 5px 5px;
+  color: #ffffff;
+}
+
+.desktop,body,.boot{
+	  background: #008080;
+}
+
+.windows-lists {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc( 100% - 10px );
+  height:  calc( 100% - 10px );
+}
+
+.window {
+    border: 5px solid #808080;
+    background: #000080;
+		float: left;
+		position:absolute;
+    /* overflow: auto; */
+}
+
+button {
+  background: transparent;
+  /* border-color: black; */
+  color: #fff;
+}
+
+.icons {
+	width: 80px !important;
+	height: 80px !important;
+  margin-left: 5px;
+}
+
+button:hover {
+  /* background: #9999aa; */
+  color: black;
+}
+
+.wininner{
+	background-color: #c0c0c0;
+  color:black; /** text color **/
+  user-select: text;
+  -moz-user-select: text;
+  -webkit-user-select: text;
+  -ms-user-select: text;
+	width:100%;
+	height:100%;
+	overflow:hidden;
+	position:relative;
+}
+
+.error {  
+  user-select: text;
+  -moz-user-select: text;
+  -webkit-user-select: text;
+  -ms-user-select: text;
+}
+
+:not(.active) .wintitle{
+	background-image: #808080;
+}
+
+.active .wintitle {
+	background-image: #000080;
+}
+
+.wintitle{
+	float:left;
+	margin-right:100%;
+  width:100%;
+}
+
+.wintitle * {
+	float:right;
+}
+
+.wintitlebtn {
+  float: right;
+	cursor: pointer;
+  margin-left: 2px;
+}
+
+.winclosebtn {
+	background-color: #c0c0c0;
+  font-size: 11px;
+}
+
+.winmaximizebtn {
+  font-size: 11px;
+}
+
+.winminimizebtn {
+  font-size: 11px;
+}
+
+.winmaximizebtn:hover, .winminimizebtn:hover {
+  background-color: blue;
+}
+
+.minimizewin {
+  display: inline;
+  color:black;
+  margin-right: 5px;
+  border-color: black;
+  border-style: inherit;
+  padding: 0px 5px;
+}
+
+.minimizewin:hover {
+  color: white;
+  background-color: blue;
+}
+
+button.selected {
+	/* background-color: white; */
+	border:1px black dashed;
+	color:black;
+}
+
+#listbar{
+	border-top: 1px solid #fff;
+  border-left: 1px solid #fff;
+  border-right: 1px solid gray;
+  border-bottom: 1px solid gray;
+  box-shadow: inset 1px 1px #dfdfdf, 1px 0 #000, 0 1px #000, 1px 1px #000;
+  background-color: silver;
+	height: 20px;
+	width: 100vw;
+	float: left;
+	margin:0;
+	padding:0;
+	position: absolute;
+	left:0px;
+	bottom:0px;
+}
+
+@keyframes openanim {
+	from{
+		transform:scaleY(0);
+	}
+	to{
+		transform:scaleY(1);
+	}
+}
+
+@keyframes closeanim {
+	from{
+		transform: translateY(0)
+	}
+	to{
+		transform: translateY(100vh);
+	}
+}
+
+.window:not(.closing){
+	animation: .1s openanim linear;
+}
+
+.window.closing{
+	animation: .1s closeanim linear;
+}
+
+#listbar_clock {
+	float: right;
+	color:black;
+	position: relative;
+	bottom: 1px;
+	right: 5px;
+}
+
+.window.minimizing{
+	animation: .1s openanim linear reverse;
+}
+
+img{
+	image-rendering: -webkit-optimize-contrast;
+}
+
+input, .text, textarea{
+	user-select: text;
+	cursor: url(/cursors/TextSelect.cur), auto;
+}
+
+.resizer-right {
+  width: 5px;
+  height: calc(100% - 19px);
+  top: 19px;
+  background: transparent;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  cursor: e-resize;
+}
+
+.resizer-bottom {
+  width: 100%;
+  height: 5px;
+  background: transparent;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  cursor: n-resize;
+}
+
+.resizer-both {
+  width: 5px;
+  height: 5px;
+  background: transparent;
+  z-index: 10;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  cursor: nw-resize;
+}
+
+@font-face {
+	font-family: "W95FA";
+	src: url(/fonts/W95FA/W95FA.otf);
+}
+/*
+.boot center{
+	background-image: url(https://i.ytimg.com/vi/miZHa7ZC6Z0/hqdefault.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+}
+
+.boot center *{
+	display:none;
+}
+*/
+.popup{
+	background-color:white;
+  color: black;
+	position: absolute;
+  z-index: 9999;
+  border-top: 3px solid #000000;
+  border-left: 3px solid #000000;
+  border-bottom: 3px solid #000000;
+}
+
+/* windows 95/98 scroll bar (originally made for windows 93) */
+body *::-webkit-scrollbar {
+  width: 16px;
+  height: 16px;
+  background: none;
+}
+
+body *::-webkit-scrollbar-thumb, body *::-webkit-scrollbar-button {
+  width: 16px;
+  height: 16px;
+  background: silver;
+  box-shadow: inset 1px 1px #dfdfdf, inset -1px -1px gray;
+  border: 1px solid;
+  border-color: silver #000 #000 silver;
+}
+
+body *::-webkit-scrollbar-track {
+  image-rendering: optimizeSpeed;
+  image-rendering: pixelated;
+  image-rendering: optimize-contrast;
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgLTAuNSAyIDIiIHNoYXBlLXJlbmRlcmluZz0iY3Jpc3BFZGdlcyI+CjxtZXRhZGF0YT5NYWRlIHdpdGggUGl4ZWxzIHRvIFN2ZyBodHRwczovL2NvZGVwZW4uaW8vc2hzaGF3L3Blbi9YYnh2Tmo8L21ldGFkYXRhPgo8cGF0aCBzdHJva2U9IiNjMGMwYzAiIGQ9Ik0wIDBoMU0xIDFoMSIgLz4KPC9zdmc+");
+  background-position: 0 0;
+  background-repeat: repeat;
+  background-size: 2px;
+}
+
+body *::-webkit-scrollbar-button {
+  background-repeat: no-repeat;
+  background-size: 16px;
+}
+
+body *::-webkit-scrollbar-button:single-button:vertical:decrement {
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgLTAuNSAxNiAxNiIgc2hhcGUtcmVuZGVyaW5nPSJjcmlzcEVkZ2VzIj4KPG1ldGFkYXRhPk1hZGUgd2l0aCBQaXhlbHMgdG8gU3ZnIGh0dHBzOi8vY29kZXBlbi5pby9zaHNoYXcvcGVuL1hieHZOajwvbWV0YWRhdGE+CjxwYXRoIHN0cm9rZT0iIzAwMDAwMCIgZD0iTTcgNWgxTTYgNmgzTTUgN2g1TTQgOGg3IiAvPgo8L3N2Zz4=");
+}
+
+body *::-webkit-scrollbar-button:single-button:vertical:increment {
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgLTAuNSAxNiAxNiIgc2hhcGUtcmVuZGVyaW5nPSJjcmlzcEVkZ2VzIj4KPG1ldGFkYXRhPk1hZGUgd2l0aCBQaXhlbHMgdG8gU3ZnIGh0dHBzOi8vY29kZXBlbi5pby9zaHNoYXcvcGVuL1hieHZOajwvbWV0YWRhdGE+CjxwYXRoIHN0cm9rZT0iIzAwMDAwMCIgZD0iTTQgNWg3TTUgNmg1TTYgN2gzTTcgOGgxIiAvPgo8L3N2Zz4=");
+}
+
+body *::-webkit-scrollbar-button:single-button:horizontal:decrement {
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgLTAuNSAxNiAxNiIgc2hhcGUtcmVuZGVyaW5nPSJjcmlzcEVkZ2VzIj4KPG1ldGFkYXRhPk1hZGUgd2l0aCBQaXhlbHMgdG8gU3ZnIGh0dHBzOi8vY29kZXBlbi5pby9zaHNoYXcvcGVuL1hieHZOajwvbWV0YWRhdGE+CjxwYXRoIHN0cm9rZT0iIzAwMDAwMCIgZD0iTTggM2gxTTcgNGgyTTYgNWgzTTUgNmg0TTYgN2gzTTcgOGgyTTggOWgxIiAvPgo8L3N2Zz4=");
+}
+
+body *::-webkit-scrollbar-button:single-button:horizontal:increment {
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgLTAuNSAxNiAxNiIgc2hhcGUtcmVuZGVyaW5nPSJjcmlzcEVkZ2VzIj4KPG1ldGFkYXRhPk1hZGUgd2l0aCBQaXhlbHMgdG8gU3ZnIGh0dHBzOi8vY29kZXBlbi5pby9zaHNoYXcvcGVuL1hieHZOajwvbWV0YWRhdGE+CjxwYXRoIHN0cm9rZT0iIzAwMDAwMCIgZD0iTTYgM2gxTTYgNGgyTTYgNWgzTTYgNmg0TTYgN2gzTTYgOGgyTTYgOWgxIiAvPgo8L3N2Zz4=");
+}
+
+body *::-webkit-scrollbar-corner {
+  background: silver;
+}
+
+/* dakedres was here ;3 */
